@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Galacta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        bg: '#000000',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overscroll-behavior: none;
+        }
+
+        .art-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.artchive.com/wp-content/uploads/2023/04/Hands-of-God-and-Adam-Michelangelo.jpg');
+            background-size: cover;
+            background-position: center 40%;
+            opacity: 0.5;
+            filter: grayscale(110%) contrast(1.1);
+            z-index: 0;
+            animation: breathe 25s infinite alternate ease-in-out;
+            will-change: transform;
+        }
+
+        @keyframes breathe {
+            from { transform: scale(1.05); }
+            to { transform: scale(1.15); }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, #000000 95%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+        }
+        
+        .cursive-accent {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 400;
+            color: #fcfcfc; 
+        }
+
+        .input-pill {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 999px;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+        }
+        
+        .input-pill:focus-within {
+            background: rgba(30, 30, 30, 0.8);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 50px -10px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-action {
+            background: #FFFFFF;
+            color: #000000;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .btn-action:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+        
+        input::placeholder {
+            color: #888;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+
+    <div class="art-bg"></div>
+    <div class="overlay"></div>
+
+    <main class="relative z-10 flex-1 flex flex-col items-center justify-center px-6 text-center animate-fade-in w-full">
+        
+        <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-medium text-white mb-10 max-w-7xl mx-auto">
+            <span class="cursive-accent pr-2">Genius</span> is eternal <br class="hidden md:block" />
+            <span class="cursive-accent">patience.</span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-zinc-300 mb-14 max-w-2xl mx-auto leading-relaxed font-light tracking-wide">
+            Galacta is building the white-label booking infrastructure for the next generation of agencies.
+        </p>
+
+        <div class="w-full max-w-[460px] mx-auto relative">
+            <form onsubmit="handleRealSubmit(event)" class="relative">
+                <div class="input-pill p-2 flex items-center gap-2 pr-2 pl-6">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        required 
+                        placeholder="your@email.com" 
+                        class="flex-1 bg-transparent border-none text-white focus:outline-none focus:ring-0 text-base h-14"
+                    >
+                    <button type="submit" class="btn-action px-8 h-14 whitespace-nowrap">
+                        Get Notified
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+    
+    <div id="toast" class="fixed bottom-12 left-1/2 transform -translate-x-1/2 bg-[#111] border border-white/10 text-white px-6 py-4 rounded-full shadow-2xl translate-y-32 opacity-0 transition-all duration-500 flex items-center gap-4 z-50 w-max max-w-[90vw]">
+        <div class="w-2 h-2 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,1)] flex-shrink-0"></div>
+        <p class="text-base font-medium tracking-wide">You are on the list.</p>
+    </div>
+
+    <script>
+        async function handleRealSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const input = document.getElementById('email');
+            const toast = document.getElementById('toast');
+            
+            if (!input.value) return;
+
+            const originalText = btn.innerText;
+            btn.innerText = "Processing";
+            btn.style.opacity = "0.9";
+            btn.style.cursor = "wait";
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/join', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: input.value })
+                });
+
+                if (response.ok) {
+                    btn.innerText = "Joined";
+                    input.value = "";
+                    toast.classList.remove('translate-y-32', 'opacity-0');
+                    
+                    setTimeout(() => {
+                        toast.classList.add('translate-y-32', 'opacity-0');
+                        btn.innerText = "Get Notified";
+                        btn.style.opacity = "1";
+                        btn.style.cursor = "pointer";
+                        btn.disabled = false;
+                    }, 4000);
+                } else {
+                    throw new Error('Server error');
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert("Something went wrong. Please try again.");
+                btn.innerText = originalText;
+                btn.style.opacity = "1";
+                btn.style.cursor = "pointer";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
