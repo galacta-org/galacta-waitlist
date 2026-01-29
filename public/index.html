@@ -56,12 +56,18 @@
             height: 100%;
             background-image: url('https://www.artchive.com/wp-content/uploads/2023/04/Hands-of-God-and-Adam-Michelangelo.jpg');
             background-size: cover;
-            background-position: center 40%;
+            background-position: 60% center; 
             opacity: 0.5;
             filter: grayscale(110%) contrast(1.1);
             z-index: 0;
             animation: breathe 25s infinite alternate ease-in-out;
             will-change: transform;
+        }
+
+        @media (min-width: 768px) {
+            .art-bg {
+                background-position: center 40%;
+            }
         }
 
         @keyframes breathe {
@@ -82,7 +88,7 @@
 
         .hero-title {
             letter-spacing: -0.03em;
-            line-height: 0.95;
+            line-height: 1.1;
         }
         
         .cursive-accent {
@@ -93,7 +99,7 @@
         }
 
         .input-pill {
-            background: rgba(20, 20, 20, 0.6);
+            background: rgba(20, 20, 20, 0.7);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -103,7 +109,7 @@
         }
         
         .input-pill:focus-within {
-            background: rgba(30, 30, 30, 0.8);
+            background: rgba(30, 30, 30, 0.9);
             border-color: rgba(255, 255, 255, 0.3);
             box-shadow: 0 10px 50px -10px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.1);
             transform: translateY(-2px);
@@ -114,7 +120,7 @@
             color: #000000;
             border-radius: 999px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem; 
             transition: all 0.2s;
         }
         .btn-action:hover {
@@ -133,28 +139,28 @@
     <div class="art-bg"></div>
     <div class="overlay"></div>
 
-    <main class="relative z-10 flex-1 flex flex-col items-center justify-center px-6 text-center animate-fade-in w-full">
+    <main class="relative z-10 flex-1 flex flex-col items-center justify-center px-5 text-center animate-fade-in w-full">
         
-        <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-medium text-white mb-10 max-w-7xl mx-auto">
+        <h1 class="hero-title text-5xl md:text-8xl lg:text-9xl font-medium text-white mb-8 md:mb-10 max-w-7xl mx-auto">
             <span class="cursive-accent pr-2">Genius</span> is eternal <br class="hidden md:block" />
             <span class="cursive-accent">patience.</span>
         </h1>
         
-        <p class="text-xl md:text-2xl text-zinc-300 mb-14 max-w-2xl mx-auto leading-relaxed font-light tracking-wide">
+        <p class="text-lg md:text-2xl text-zinc-300 mb-10 md:mb-14 max-w-xl md:max-w-2xl mx-auto leading-relaxed font-light tracking-wide px-2">
             Galacta is building the white-label booking infrastructure for the next generation of agencies.
         </p>
 
         <div class="w-full max-w-[460px] mx-auto relative">
             <form onsubmit="handleRealSubmit(event)" class="relative">
-                <div class="input-pill p-2 flex items-center gap-2 pr-2 pl-6">
+                <div class="input-pill p-1.5 md:p-2 flex items-center gap-2 pr-1.5 md:pr-2 pl-5 md:pl-6">
                     <input 
                         type="email" 
                         id="email" 
                         required 
                         placeholder="your@email.com" 
-                        class="flex-1 bg-transparent border-none text-white focus:outline-none focus:ring-0 text-base h-14"
+                        class="flex-1 bg-transparent border-none text-white focus:outline-none focus:ring-0 text-base h-12 md:h-14 min-w-0"
                     >
-                    <button type="submit" class="btn-action px-8 h-14 whitespace-nowrap">
+                    <button type="submit" class="btn-action px-5 md:px-8 h-12 md:h-14 whitespace-nowrap">
                         Get Notified
                     </button>
                 </div>
@@ -163,7 +169,7 @@
 
     </main>
     
-    <div id="toast" class="fixed bottom-12 left-1/2 transform -translate-x-1/2 bg-[#111] border border-white/10 text-white px-6 py-4 rounded-full shadow-2xl translate-y-32 opacity-0 transition-all duration-500 flex items-center gap-4 z-50 w-max max-w-[90vw]">
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-[#111] border border-white/10 text-white px-6 py-4 rounded-full shadow-2xl translate-y-32 opacity-0 transition-all duration-500 flex items-center gap-4 z-50 w-[90%] max-w-sm md:w-max">
         <div class="w-2 h-2 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,1)] flex-shrink-0"></div>
         <p class="text-base font-medium tracking-wide">You are on the list.</p>
     </div>
@@ -193,6 +199,7 @@
                 if (response.ok) {
                     btn.innerText = "Joined";
                     input.value = "";
+                    input.blur();
                     toast.classList.remove('translate-y-32', 'opacity-0');
                     
                     setTimeout(() => {
