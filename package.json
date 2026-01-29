@@ -1,0 +1,11 @@
+{
+  "name": "galacta-waitlist",
+  "version": "1.0.0",
+  "description": "Galacta Waitlist",
+  "scripts": {
+    "start": "node api/join.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}
